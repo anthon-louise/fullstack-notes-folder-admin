@@ -1,4 +1,4 @@
-const { createConnection } = require('mysql2')
+require('dotenv').config()
 const mysql = require('mysql2/promise')
 
 const pool = mysql.createPool({
@@ -18,8 +18,9 @@ async function initializeDatabase() {
         await connection.query(`
         CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(255),
-            password TEXT
+            username VARCHAR(255) UNIQUE,
+            password TEXT,
+            role VARCHAR(10) DEFAULT ('user')
         )
         `)
 
@@ -50,8 +51,9 @@ async function initializeDatabase() {
         await connection.query(`
             CREATE TABLE IF NOT EXISTS admins (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(255),
-            password TEXT
+            username VARCHAR(255) UNIQUE,
+            password TEXT,
+            role VARCHAR(10) DEFAULT ('admin')
             )
             `)
 
