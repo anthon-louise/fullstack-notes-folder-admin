@@ -1,5 +1,5 @@
 import Button from "../components/Button"
-import TextBox from "../components/Input"
+import TextBox from "../components/TextBox"
 import { useState } from "react"
 import { createFolder } from "../services/folderService"
 
