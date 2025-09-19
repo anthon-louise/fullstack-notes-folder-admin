@@ -16,6 +16,11 @@ function HomePage() {
             console.log('unsuc')
         }
         console.log(data)
+        switchActiveInput()
+    }
+
+    const switchActiveInput = () => {
+        setactiveFolderInput(!activeFolderInput)
     }
 
     return (
@@ -24,13 +29,16 @@ function HomePage() {
             {
                 activeFolderInput ? (
                     <div>
-                        <TextBox label="Create Folder" value={folderName} onChange={setFolderName}/>
-                        <Button type="submit" label="Create Folder" onClick={handleCreateFolder}/>
+                        <Button label="Create Folder" type="submit" onClick={switchActiveInput}/>
                     </div>
                 )
                     :
                     (
-                        <p>hello</p>
+                    <div>
+                        <TextBox label="Create Folder" value={folderName} onChange={setFolderName}/>
+                        <Button type="submit" label="Save" onClick={handleCreateFolder}/>     
+                        <Button label="Cancel" type="submit" onClick={switchActiveInput}/>
+                    </div>
                     )
             }
 
