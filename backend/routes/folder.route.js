@@ -4,5 +4,6 @@ const folderController = require('../controllers/folder.controller')
 const auth = require('../middlewares/auth')
 
 router.post('/', auth, folderController.createFolder)
+router.get('/', auth, folderController.fetchFolders)
 
 module.exports = router

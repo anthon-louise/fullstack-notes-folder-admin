@@ -1,27 +1,38 @@
 import Button from "../components/Button"
 import TextBox from "../components/TextBox"
-import { useState } from "react"
-import { createFolder } from "../services/folderService"
+import FolderList from "../components/FolderList"
+import { useState, useEffect } from "react"
+import { createFolder, fetchFolders } from "../services/folderService"
 
 function HomePage() {
     const [folderName, setFolderName] = useState('')
     const [activeFolderInput, setactiveFolderInput] = useState(true)
-
+    const [folders, setFolders] = useState([])
 
     const handleCreateFolder = async () => {
         const data = await createFolder(folderName)
         if (data.success) {
-            console.log('suc')
+            console.log("success")
         } else {
-            console.log('unsuc')
+            console.log("unsuccess")
         }
-        console.log(data)
+        alert(data.message)
+        setFolderName("")
         switchActiveInput()
+    }
+
+    const fetchFolder = async () => {
+        const data = await fetchFolders()
+        setFolders(data.data)
     }
 
     const switchActiveInput = () => {
         setactiveFolderInput(!activeFolderInput)
     }
+
+    useEffect(() => {
+        fetchFolder()
+    }, [])
 
     return (
         <div>
@@ -41,6 +52,9 @@ function HomePage() {
                     </div>
                     )
             }
+            <div>
+                <FolderList folders={folders}/>
+            </div>
 
         </div>
     )

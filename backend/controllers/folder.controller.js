@@ -18,6 +18,40 @@ const createFolder = asyncHandler(async (req, res) => {
     })
 })
 
+const fetchFolders = asyncHandler(async (req, res) => {
+    const {userId} = req.user
+
+    const [rows] = await pool.query(`
+        SELECT * FROM folders
+        WHERE user_id=?
+        `, [userId])
+    
+    res.json({
+        message: 'Folders fetched',
+        success: true,
+        data: rows
+    })
+})
+
+const fetchNotes = asyncHandler(async (req, res) => {
+    const {userId} = req.user
+    const value = await joiValidation.idSchema.validateAsync(req.params)
+    const {id} = value
+
+    const [rows] = await pool.query(`
+        SEELCT * FROM folders
+        WHERE user_id=? AND id=?
+        `, [userId, id])
+
+    res.json({
+        message: 'Fetch notes',
+        success: true,
+        data: rows
+    })
+})
+
 module.exports = {
-    createFolder
+    createFolder,
+    fetchFolders,
+    fetchNotes
 }

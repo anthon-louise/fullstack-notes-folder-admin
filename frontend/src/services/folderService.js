@@ -13,3 +13,14 @@ export async function createFolder(folderName) {
     }
 }
 
+export async function fetchFolders() {
+    try {
+        const res = await axios.get(`${API_URL}`, {withCredentials: true})
+        return res.data
+    } catch (err) {
+        if (err.response && err.response.data) {
+            return err.response.data
+        }
+        return {success: false, message: err.message1}
+    }
+}
