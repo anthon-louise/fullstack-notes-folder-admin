@@ -4,7 +4,10 @@ function NoteList({ notes }) {
             <ul>
                 {
                     notes.map((note) => (
-                        <li key={note.id}>{note.title}</li>
+                        <li key={note.id}>
+                            <h3>{note.title}</h3>
+                            <p>{note.content}</p>
+                        </li>
                     ))
                 }
 
