@@ -5,5 +5,6 @@ const auth = require('../middlewares/auth')
 
 router.post('/', auth, folderController.createFolder)
 router.get('/', auth, folderController.fetchFolders)
+router.get('/:id', auth, folderController.fetchNotes)
 
 module.exports = router

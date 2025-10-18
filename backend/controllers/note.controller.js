@@ -3,14 +3,15 @@ const joiValidation = require('../middlewares/joiValidation')
 const pool = require('../config/db')
 
 const fetchNote = asyncHandler(async (req, res) => {
-    const {userId} = req.user
-    const value = await joiValidation.idSchema.validateAsync(req.params)
-    const {id} = value
+    const noteIdValue = await joiValidation.idSchema.validateAsync(req.params)
+    const folderIdValue = await joiValidation.idSchema.validateAsync(req.body)
+    const {folderId} = folderIdValue
+    const {noteId} = noteIdValue
 
     const [rows] = await pool.query(`
         SELECT * FROM notes
         WHERE folder_id=? AND id=?
-        `, [userId, id])
+        `, [folderId, noteId])
 
     res.json({
         message: 'Fetch note',
