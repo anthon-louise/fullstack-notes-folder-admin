@@ -24,3 +24,15 @@ export async function fetchFolders() {
         return {success: false, message: err.message1}
     }
 }
+
+export async function fetchNotes(id) {
+    try {
+        const res = await axios.get(`${API_URL}/${id}`, {withCredentials: true})
+        return res.data
+    } catch (err) {
+        if (err.response && err.response.data) {
+            return err.response.data
+        }
+        return {success: false, message: err.message}
+    }
+}
