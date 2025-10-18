@@ -41,9 +41,7 @@ async function initializeDatabase() {
                 title VARCHAR(255),
                 content VARCHAR(255),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                user_id INT,
                 folder_id INT,
-                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ,
                 FOREIGN KEY (folder_id) REFERENCES folders(id) ON DELETE CASCADE 
             )
             `)
