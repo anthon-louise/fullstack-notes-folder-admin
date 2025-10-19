@@ -4,7 +4,7 @@ import { fetchNotes } from "../services/folderService"
 import NoteList from "../components/NoteList"
 import TextBox from "../components/TextBox"
 import Button from "../components/Button"
-import { createNote, deleteNote } from "../services/noteService"
+import { createNote, deleteNote, updateNote } from "../services/noteService"
 
 
 function FoldersPage() {
@@ -36,6 +36,12 @@ function FoldersPage() {
         alert(data.message)
         handleFetchNotes()
     }
+    
+    const handleUpdateNote = async (title, content, id) => {
+        const data = await updateNote(title, content, id)
+        console.log(data)
+        handleFetchNotes()
+    }
 
     useEffect(() => {
         handleFetchNotes()
@@ -61,7 +67,7 @@ function FoldersPage() {
                 )
                 
             }
-            <NoteList notes={notes} handleDeleteNote={handleDeleteNote}/>
+            <NoteList notes={notes} handleDeleteNote={handleDeleteNote} handleUpdateNote={handleUpdateNote}/>
         </div>
     )
 }
