@@ -12,3 +12,15 @@ export async function createNote({title, content}, folderId) {
         return {success: false, message: err.message}
     }
 }
+
+export async function deleteNote(noteId) {
+    try {
+        const res = await axios.delete(`${API_URL}/${noteId}`, {withCredentials: true})
+        return res.data
+    } catch (err) {
+        if (err.response && err.response.data) {
+            return err.response.data
+        }
+        return {success: false, message: err.message}
+    }
+}

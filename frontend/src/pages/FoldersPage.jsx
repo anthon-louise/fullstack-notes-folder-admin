@@ -4,7 +4,7 @@ import { fetchNotes } from "../services/folderService"
 import NoteList from "../components/NoteList"
 import TextBox from "../components/TextBox"
 import Button from "../components/Button"
-import { createNote } from "../services/noteService"
+import { createNote, deleteNote } from "../services/noteService"
 
 
 function FoldersPage() {
@@ -31,6 +31,12 @@ function FoldersPage() {
         setIsActiveInput(!isActiveInput)
     }
 
+    const handleDeleteNote = async (id) => {
+        const data = await deleteNote(id)
+        alert(data.message)
+        handleFetchNotes()
+    }
+
     useEffect(() => {
         handleFetchNotes()
     }, [])
@@ -55,7 +61,7 @@ function FoldersPage() {
                 )
                 
             }
-            <NoteList notes={notes}/>
+            <NoteList notes={notes} handleDeleteNote={handleDeleteNote}/>
         </div>
     )
 }
