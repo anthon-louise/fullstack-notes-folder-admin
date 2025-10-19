@@ -53,8 +53,27 @@ const deleteNote = asyncHandler(async (req, res) => {
     })
 })
 
+const updateNote = asyncHandler(async (req, res) => {
+    const idValue = await joiValidation.idSchema.validateAsync(req.params)
+    const bodyValue = await joiValidation.noteSchema.validateAsync(req.body)
+    const {id} = idValue
+    const {title, content} = bodyValue
+
+    await pool.query(`
+        UPDATE notes
+        SET title=?, content=?
+        WHERE id=?
+        `, [title, content, id])
+
+    res.json({
+        message: 'Updated successfully',
+        success: true
+    })
+})
+
 module.exports = {
     fetchNote,
     createNotes,
-    deleteNote
+    deleteNote,
+    updateNote
 }
