@@ -5,5 +5,6 @@ const noteController = require('../controllers/note.controller')
 
 router.get('/:id', auth, noteController.fetchNote)
 router.post('/:id', auth, noteController.createNotes)
+router.delete('/:id', auth, noteController.deleteNote)
 
 module.exports = router
