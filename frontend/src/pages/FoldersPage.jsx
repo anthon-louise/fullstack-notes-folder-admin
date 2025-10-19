@@ -39,7 +39,7 @@ function FoldersPage() {
     
     const handleUpdateNote = async (title, content, id) => {
         const data = await updateNote(title, content, id)
-        console.log(data)
+        alert(data.message)
         handleFetchNotes()
     }
 

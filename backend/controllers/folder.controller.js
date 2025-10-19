@@ -34,7 +34,6 @@ const fetchFolders = asyncHandler(async (req, res) => {
 })
 
 const fetchNotes = asyncHandler(async (req, res) => {
-    const {userId} = req.user
 
     const value = await joiValidation.idSchema.validateAsync(req.params)
     const {id} = value
@@ -51,8 +50,24 @@ const fetchNotes = asyncHandler(async (req, res) => {
     })
 })
 
+const deleteFolder = asyncHandler(async (req, res) => {
+    const value = await joiValidation.idSchema.validateAsync(req.params)
+    const {id} = value
+
+    await pool.query(`
+        DELETE FROM folders
+        WHERE id=?
+        `, [id])
+
+    res.json({
+        message: 'Folder deleted',
+        success: true
+    })
+})
+
 module.exports = {
     createFolder,
     fetchFolders,
-    fetchNotes
+    fetchNotes,
+    deleteFolder
 }
