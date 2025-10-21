@@ -2,7 +2,7 @@ import Button from "../components/Button"
 import TextBox from "../components/TextBox"
 import FolderList from "../components/FolderList"
 import { useState, useEffect } from "react"
-import { createFolder, fetchFolders, deleteFolder } from "../services/folderService"
+import { createFolder, fetchFolders, deleteFolder, updateFolder } from "../services/folderService"
 
 function HomePage() {
     const [folderName, setFolderName] = useState('')
@@ -28,10 +28,17 @@ function HomePage() {
         fetchFolder()
     }
 
+    const handleUpdateFolder = async (id, newFolderName) => {
+        const data = await updateFolder(id, newFolderName)
+        alert(data.message)
+        fetchFolder()
+    }
+
     const fetchFolder = async () => {
         const data = await fetchFolders()
         setFolders(data.data)
     }
+
 
     const switchActiveInput = () => {
         setactiveFolderInput(!activeFolderInput)
@@ -60,7 +67,7 @@ function HomePage() {
                     )
             }
             <div>
-                <FolderList folders={folders} handleDeleteFolder={handleDeleteFolder}/>
+                <FolderList folders={folders} handleDeleteFolder={handleDeleteFolder} handleUpdateFolder={handleUpdateFolder}/>
             </div>
 
         </div>

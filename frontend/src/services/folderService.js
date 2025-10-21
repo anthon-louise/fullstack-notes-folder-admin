@@ -48,3 +48,15 @@ export async function deleteFolder(id) {
         return {success: false, message: err.message}
     }
 }
+
+export async function updateFolder(id, name) {
+    try {
+        const res = await axios.put(`${API_URL}/${id}`, {name}, {withCredentials: true})
+        return res.data
+    } catch (err) {
+        if (err.response && err.response.data) {
+            return err.response.data
+        }
+        return {success: false, message: err.message}
+    }
+}

@@ -65,9 +65,28 @@ const deleteFolder = asyncHandler(async (req, res) => {
     })
 })
 
+const updateFolder = asyncHandler(async (req, res) => {
+    const idValue = await joiValidation.idSchema.validateAsync(req.params)
+    const bodyValue = await joiValidation.folderSchema.validateAsync(req.body)
+    const {id} = idValue
+    const {name} = bodyValue
+
+    await pool.query(`
+        UPDATE folders
+        SET name=?
+        WHERE id=?
+        `, [name, id])
+
+    res.json({
+        message: "Folder updated",
+        success: true
+    })
+})
+
 module.exports = {
     createFolder,
     fetchFolders,
     fetchNotes,
-    deleteFolder
+    deleteFolder,
+    updateFolder
 }

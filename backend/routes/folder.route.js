@@ -7,5 +7,6 @@ router.post('/', auth, folderController.createFolder)
 router.get('/', auth, folderController.fetchFolders)
 router.get('/:id', auth, folderController.fetchNotes)
 router.delete('/:id', auth, folderController.deleteFolder)
+router.put('/:id', auth, folderController.updateFolder)
 
 module.exports = router
