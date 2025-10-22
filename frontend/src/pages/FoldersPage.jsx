@@ -4,6 +4,7 @@ import { fetchNotes } from "../services/folderService"
 import NoteList from "../components/NoteList"
 import TextBox from "../components/TextBox"
 import Button from "../components/Button"
+import NavBar from "../components/NavBar"
 import { createNote, deleteNote, updateNote } from "../services/noteService"
 
 
@@ -49,6 +50,8 @@ function FoldersPage() {
 
     return (
         <div>
+            <NavBar/>
+            <br />
             {
                 isActiveInput ?
                 (

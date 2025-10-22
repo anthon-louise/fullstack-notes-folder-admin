@@ -63,7 +63,8 @@ const loginUser = asyncHandler(async (req, res) => {
         security: false,
         httpOnly: true,
         maxAge: 3600000,
-        sameSite: "lax"
+        sameSite: "lax",
+        path: '/'
     })
 
     res.json({
@@ -72,7 +73,22 @@ const loginUser = asyncHandler(async (req, res) => {
     })
 })
 
+const logoutUser = asyncHandler(async (req, res) => {
+    res.clearCookie('token', {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: false, 
+    path: '/',
+  })
+
+    res.json({
+        message: 'User logged out',
+        success: true
+    })
+})
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser
 }

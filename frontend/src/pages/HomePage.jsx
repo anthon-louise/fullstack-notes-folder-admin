@@ -1,6 +1,7 @@
 import Button from "../components/Button"
 import TextBox from "../components/TextBox"
 import FolderList from "../components/FolderList"
+import NavBar from "../components/NavBar"
 import { useState, useEffect } from "react"
 import { createFolder, fetchFolders, deleteFolder, updateFolder } from "../services/folderService"
 
@@ -50,6 +51,7 @@ function HomePage() {
 
     return (
         <div>
+            <NavBar/>
             <h3>Notes</h3>
             {
                 activeFolderInput ? (

@@ -24,3 +24,15 @@ export async function loginUser(credentials) {
         return {success: false, message: err.message}
     } 
 }
+
+export async function logoutUser() {
+    try {
+        const res = await axios.post(`${API_URL}/logout`, {}, {withCredentials: true})
+        return res.data
+    } catch (err) {
+        if (err.response && err.response.data) {
+            return err.response.data
+        }
+        return {success: false, message: err.message}
+    }
+}
