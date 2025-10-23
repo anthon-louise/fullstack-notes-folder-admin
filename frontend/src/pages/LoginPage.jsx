@@ -1,19 +1,23 @@
 import { useState } from "react"
 import { loginUser } from "../services/userService"
+import { useNavigate } from "react-router-dom"
 import TextBox from "../components/TextBox"
 import Button from "../components/Button"
 
 function LoginPage() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
 
     const handleLogin = async () => {
         const credentials = { username, password }
         const data = await loginUser(credentials)
         if (data.success) {
-            console.log("success")
+            alert("login success")
+            navigate('/')
+
         } else {
-            console.log("unsuccess")
+            alert("login unsuccess")
         }
         console.log(data)
     }

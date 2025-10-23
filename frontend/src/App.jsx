@@ -16,7 +16,11 @@ function App() {
                     } />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/register' element={<RegisterPage />} />
-                <Route path='/folder/:folderId' element={<FoldersPage/>} />
+                <Route path='/folder/:folderId' element={
+                    <ProtectedRoute>
+                        <FoldersPage/>
+                    </ProtectedRoute>
+                    } />
             </Routes>
         </BrowserRouter>
     )
