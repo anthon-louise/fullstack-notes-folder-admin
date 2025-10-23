@@ -87,8 +87,17 @@ const logoutUser = asyncHandler(async (req, res) => {
     })
 })
 
+const verifyUser = asyncHandler(async (req, res) => {
+    res.json({
+        message: 'User authenticated',
+        success: true,
+        userId: req.user.userId
+    })
+})
+
 module.exports = {
     registerUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    verifyUser
 }

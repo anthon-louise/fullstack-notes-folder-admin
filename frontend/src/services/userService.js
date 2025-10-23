@@ -36,3 +36,15 @@ export async function logoutUser() {
         return {success: false, message: err.message}
     }
 }
+
+export async function verifyUser() {
+    try {
+        const res = await axios.get(`${API_URL}/verify`, {withCredentials: true})
+        return res.data
+    } catch (err) {
+        if (err.response && err.response.data) {
+            return err.response.data
+        }
+        return {success: false, message: err.response.data}
+    }
+}
